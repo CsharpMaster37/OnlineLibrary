@@ -15,8 +15,5 @@ namespace DB_Realize_OnlineLibrary.Models
         [Range(typeof(DateTime), "1/1/1900", "1/1/2023", ErrorMessage = "Недопустимая дата")]
         [Display(Name = "Дата рождения")]
         public DateTime? DateofBirth { get; set; }
-
-        [Display(Name = "Номер телефона")]
-        public string? Phone {  get; set; }
     }
 }

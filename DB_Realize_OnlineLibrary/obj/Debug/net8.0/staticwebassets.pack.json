@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\images\\null_image.jpg",
+      "PackagePath": "staticwebassets\\images\\null_image.jpg"
+    },
+    {
       "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

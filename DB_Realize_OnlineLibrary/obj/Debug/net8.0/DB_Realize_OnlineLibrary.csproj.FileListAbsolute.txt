@@ -515,3 +515,4 @@ C:\GitProjects\OnlineLibrary\DB_Realize_OnlineLibrary\obj\Debug\net8.0\DB_Realiz
 C:\GitProjects\OnlineLibrary\DB_Realize_OnlineLibrary\obj\Debug\net8.0\DB_Realize_OnlineLibrary.genruntimeconfig.cache
 C:\GitProjects\OnlineLibrary\DB_Realize_OnlineLibrary\obj\Debug\net8.0\ref\DB_Realize_OnlineLibrary.dll
 C:\GitProjects\OnlineLibrary\DB_Realize_OnlineLibrary\bin\Debug\net8.0\SixLabors.ImageSharp.dll
+C:\GitProjects\OnlineLibrary\DB_Realize_OnlineLibrary\obj\Debug\net8.0\DB_Realize_OnlineLibrary.sourcelink.json

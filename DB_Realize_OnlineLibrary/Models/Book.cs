@@ -29,6 +29,11 @@ namespace DB_Realize_OnlineLibrary.Models
         public int Price { get; set; }
 
         [Required]
+        [Range(1, 1000, ErrorMessage = "Недопустимое кол-во дней")]
+        [Display(Name = "Выдача на кол-во дней")]
+        public int Days { get; set; }
+
+        [Required]
         [Range(1895, 2024, ErrorMessage = "Недопустимый год")]
         [Display(Name = "Год выпуска")]
         public int Year { get; set; }
@@ -46,10 +51,10 @@ namespace DB_Realize_OnlineLibrary.Models
         [Display(Name = "Издательство")]
         public Publisher Publisher { get; set; }
 
-        [Required]
-        [StringLength(50, MinimumLength = 1, ErrorMessage = "Длина строки должна быть от 1 до 50 символов")]
-        [Display(Name = "Состояние")]
-        public string Condition { get; set; }
+        [ForeignKey("ConditionId")]
+        [HiddenInput(DisplayValue = false)]
+        public int? ConditionId { get; set; }
+        public Condition Condition { get; set; }
 
         [Required]
         [Range(0, 50000, ErrorMessage = "Недопустимое кол-во")]

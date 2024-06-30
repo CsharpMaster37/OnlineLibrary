@@ -22,27 +22,6 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Author", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("DateofBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Authors");
-                });
-
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -56,10 +35,11 @@ namespace DB_Realize_OnlineLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Condition")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int?>("ConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Days")
+                        .HasColumnType("int");
 
                     b.Property<int?>("GenreId")
                         .HasColumnType("int");
@@ -75,6 +55,9 @@ namespace DB_Realize_OnlineLibrary.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PublisherId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -83,9 +66,30 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ConditionId");
+
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Books");
+                    b.HasIndex("PublisherId");
+
+                    b.ToTable("Books", (string)null);
+                });
+
+            modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Condition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Conditions", (string)null);
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Genre", b =>
@@ -103,7 +107,7 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.GroupReaders", b =>
@@ -121,7 +125,7 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GroupReaders");
+                    b.ToTable("GroupReaders", (string)null);
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.HistoryItem", b =>
@@ -153,7 +157,7 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("History");
+                    b.ToTable("History", (string)null);
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Publisher", b =>
@@ -171,7 +175,7 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Publishers");
+                    b.ToTable("Publishers", (string)null);
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Reader", b =>
@@ -216,9 +220,6 @@ namespace DB_Realize_OnlineLibrary.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -385,11 +386,23 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Book", b =>
                 {
+                    b.HasOne("DB_Realize_OnlineLibrary.Models.Condition", "Condition")
+                        .WithMany()
+                        .HasForeignKey("ConditionId");
+
                     b.HasOne("DB_Realize_OnlineLibrary.Models.Genre", "Genre")
                         .WithMany("Books")
                         .HasForeignKey("GenreId");
 
+                    b.HasOne("DB_Realize_OnlineLibrary.Models.Publisher", "Publisher")
+                        .WithMany()
+                        .HasForeignKey("PublisherId");
+
+                    b.Navigation("Condition");
+
                     b.Navigation("Genre");
+
+                    b.Navigation("Publisher");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

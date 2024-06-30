@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TYCQpKPsjOc23Xko/PCUgeSfRUgxvUg13PNg/MAfI80=",
+  "Hash": "ruytBPVfIwJcXOuH26fxsONSKakGVX8vDvKpX1T8OoA=",
   "Source": "DB_Realize_OnlineLibrary",
   "BasePath": "_content/DB_Realize_OnlineLibrary",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\images\\null_image.jpg",
+      "SourceId": "DB_Realize_OnlineLibrary",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\",
+      "BasePath": "_content/DB_Realize_OnlineLibrary",
+      "RelativePath": "images/null_image.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\null_image.jpg"
     },
     {
       "Identity": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\js\\site.js",

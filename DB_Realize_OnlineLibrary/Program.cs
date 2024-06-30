@@ -28,6 +28,28 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+//    if (!await roleManager.RoleExistsAsync("Admin"))
+//    {
+//        var role = new IdentityRole("Admin");
+//        await roleManager.CreateAsync(role);
+//    }
+//}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+//    var userManager = services.GetRequiredService<UserManager<Reader>>();
+
+//    var adminUser = await userManager.FindByIdAsync("e9881c71-1375-4d74-a092-3b443593cf9a");
+//    if (adminUser != null)
+//    {
+//        var result = await userManager.AddToRoleAsync(adminUser, "Admin");
+//    }
+//}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
