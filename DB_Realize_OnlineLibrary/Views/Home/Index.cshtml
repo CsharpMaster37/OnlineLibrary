@@ -1,5 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
-
+@{
+    var titleFilter = ViewBag.TitleFilter as string ?? "";
+    var authorFilter = ViewBag.AuthorFilter as string ?? "";
+    var publisherFilter = ViewBag.PublisherFilter as string ?? "";
+}
 <style>
     .book-container {
         display: flex;
@@ -53,10 +57,42 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <p>
-        <a class="btn btn-primary" asp-action="Create">Добавить новую книгу</a>
-    </p>
+    <div style="display:inline-flex">
+        <p>
+            <a class="btn btn-primary" asp-action="Create">Добавить новую книгу</a>
+        </p>
+        <p>
+            <a class="btn btn-primary" asp-action="Create" asp-controller="Publisher">Добавить новое издательство</a>
+        </p>
+        <p>
+            <a class="btn btn-primary" asp-action="Create" asp-controller="Genre">Добавить новый жанр</a>
+        </p>
+        <p>
+            <a class="btn btn-primary" asp-action="Create" asp-controller="Condition">Добавить новое состояние</a>
+        </p>
+    </div>
 }
+
+<button class="btn btn-secondary" onclick="toggleFilter()">Показать/Скрыть фильтр</button>
+
+<div id="filterForm" style="display: none; margin-top: 20px;">
+    <form method="get" asp-action="Index">
+        <div class="form-group">
+            <label for="title">Название</label>
+            <input type="text" name="title" id="title" class="form-control" value="@titleFilter" />
+        </div>
+        <div class="form-group">
+            <label for="author">Автор</label>
+            <input type="text" name="author" id="author" class="form-control" value="@authorFilter" />
+        </div>
+        <div class="form-group">
+            <label for="publisher">Издательство</label>
+            <input type="text" name="publisher" id="publisher" class="form-control" value="@publisherFilter" />
+        </div>
+        <button type="submit" class="btn btn-primary">Поиск</button>
+    </form>
+</div>
+
 <div class="book-container">
     @foreach (var item in Model)
     {
@@ -74,25 +110,18 @@
             <div class="book-details">
                 <p class="book-name">@item.Name</p>
                 <div class="book-info">
+                    <p><strong>Автор:</strong> @item.Author</p>
                     <p><strong>Издательство:</strong> @item.Publisher.Name</p>
                     <p><strong>Год:</strong> @item.Year</p>
                     <p><strong>Жанр:</strong> @item.Genre.Name</p>
                     <p><strong>Срок возврата:</strong> @item.Days дней</p>
+                    <p><strong>Кол-во в библиотеке:</strong> @item.Quantity</p>
                     <p><strong>Цена:</strong> @item.Price</p>
                 </div>
                 @if (User.IsInRole("Admin"))
                 {
-                    @* bool inCart = ViewBag.Cart.Contains(item.Id); *@
                     bool inCart = false;
                     <div class="btn-group">
-                        @if (!inCart)
-                        {
-                            <a class="btn btn-info" asp-action="Rent" asp-route-id="@item.Id">Арендовать</a>
-                        }
-                        else
-                        {
-                            <a href="#" class="btn btn-info" style="background-color: green; border:none">&#10003; Уже у вас</a>
-                        }
                         <a class="btn btn-info" asp-action="Reviews" asp-controller="Review" asp-route-id="@item.Id">Отзывы</a>
                         <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
                         <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
@@ -100,22 +129,25 @@
                 }
                 else if (User.Identity.IsAuthenticated)
                 {
-                    @* bool inCart = ViewBag.Cart.Contains(item.Id);
-                    bool purchbook = ViewBag.Purchasedbooks.Contains(item.Id); *@
-                    bool inCart = false;
-                    bool purchbook = false;
+                    bool inRent = ViewBag.Rent.Contains(item.Id);
                     <div class="card-footer">
-                        @if (purchbook)
+                        @if (ViewBag.IsFine)
+                        {
+                            <a asp-action="Index" asp-controller="Fines" class="btn btn-info" style="background-color: red; border:none">Оплатите штрафы</a>
+                        }
+                        else if (inRent)
                         {
                             <a href="#" class="btn btn-info" style="background-color: green; border:none">&#10003; Уже у вас</a>
                         }
-                        else if (!inCart)
+                        else if (item.Quantity == 0)
                         {
-                            <a class="btn btn-info" asp-action="Rent" asp-route-id="@item.Id">Арендовать</a>
+                            <a href="#" class="btn btn-info" style="background-color: deeppink; border:none">Закончился</a>
                         }
                         else
                         {
-                            <p class="btn btn-info">&#10003; Уже у вас</p>
+                            <form asp-action="Rent" asp-route-id="@item.Id" method="post">
+                                <button class="btn btn-info">Арендовать</button>
+                            </form>
                         }
                         <a class="btn btn-info" asp-action="Reviews" asp-controller="Review" asp-route-id="@item.Id">Отзывы</a>
                     </div>
@@ -123,7 +155,14 @@
                 else
                 {
                     <div class="card-footer">
-                        <a asp-area="Identity" asp-controller="User" asp-action="Login" class="btn btn-info">Арендовать</a>
+                        @if (item.Quantity == 0)
+                        {
+                            <a href="#" class="btn btn-info" style="background-color: deeppink; border:none">Закончился</a>
+                        }
+                        else
+                        {
+                            <a asp-area="Identity" asp-controller="User" asp-action="Login" class="btn btn-info">Арендовать</a>
+                        }
                         <a class="btn btn-info" asp-action="Reviews" asp-controller="Review" asp-route-id="@item.Id">Отзывы</a>
                     </div>
                 }
@@ -132,3 +171,15 @@
     }
 </div>
 
+@section Scripts {
+    <script>
+        function toggleFilter() {
+            var filterForm = document.getElementById("filterForm");
+            if (filterForm.style.display === "none" || filterForm.style.display === "") {
+                filterForm.style.display = "block";
+            } else {
+                filterForm.style.display = "none";
+            }
+        }
+    </script>
+}

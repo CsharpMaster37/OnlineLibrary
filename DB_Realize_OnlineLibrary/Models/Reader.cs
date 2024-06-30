@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,5 +16,10 @@ namespace DB_Realize_OnlineLibrary.Models
         [Range(typeof(DateTime), "1/1/1900", "1/1/2023", ErrorMessage = "Недопустимая дата")]
         [Display(Name = "Дата рождения")]
         public DateTime? DateofBirth { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public int? GroupId { get; set; }
+
+        [Display(Name = "Группа")]
+        public GroupReaders Group { get; set; }
     }
 }

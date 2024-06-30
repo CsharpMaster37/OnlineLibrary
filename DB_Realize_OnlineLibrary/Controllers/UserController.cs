@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace DB_Realize_OnlineLibrary.Controllers
 {
@@ -9,11 +10,15 @@ namespace DB_Realize_OnlineLibrary.Controllers
     {
         private readonly SignInManager<Reader> _signInManager;
         private readonly UserManager<Reader> _userManager;
+        LibraryContext _db;
+        IWebHostEnvironment _environment;
 
-        public UserController(SignInManager<Reader> signInManager, UserManager<Reader> userManager)
+        public UserController(SignInManager<Reader> signInManager, UserManager<Reader> userManager, LibraryContext db, IWebHostEnvironment hostEnvironment)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _db = db;
+            _environment = hostEnvironment;
         }
 
         [HttpGet]
@@ -73,6 +78,18 @@ namespace DB_Realize_OnlineLibrary.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
+            if(user.GroupId != null)
+                ViewBag.GroupName = _db.GroupReaders.FirstOrDefault(g => g.Id == user.GroupId);
+            return View(user);
         }
     }
 }

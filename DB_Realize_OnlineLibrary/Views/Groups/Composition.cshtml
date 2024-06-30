@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DB_Realize_OnlineLibrary.Models.Reader>
+
+@{
+    ViewData["Title"] = "Composition";
+}
+
+<h1>Состав группы "@ViewBag.NameGroup"</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -72,7 +72,7 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasIndex("PublisherId");
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Condition", b =>
@@ -89,7 +89,42 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Conditions", (string)null);
+                    b.ToTable("Conditions");
+                });
+
+            modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Fine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsMess")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OverdueDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReaderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Fines");
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Genre", b =>
@@ -107,7 +142,7 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.GroupReaders", b =>
@@ -125,7 +160,7 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GroupReaders", (string)null);
+                    b.ToTable("GroupReaders");
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.HistoryItem", b =>
@@ -148,16 +183,15 @@ namespace DB_Realize_OnlineLibrary.Migrations
                     b.Property<DateTime?>("ExpectedDateOfDelivery")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("NameReader")
+                    b.Property<string>("ReaderId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ReaderId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.ToTable("History", (string)null);
+                    b.HasIndex("BookId");
+
+                    b.ToTable("History");
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Publisher", b =>
@@ -175,7 +209,7 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Publishers", (string)null);
+                    b.ToTable("Publishers");
                 });
 
             modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Reader", b =>
@@ -199,6 +233,9 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -240,6 +277,8 @@ namespace DB_Realize_OnlineLibrary.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GroupId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -249,6 +288,43 @@ namespace DB_Realize_OnlineLibrary.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReaderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -403,6 +479,48 @@ namespace DB_Realize_OnlineLibrary.Migrations
                     b.Navigation("Genre");
 
                     b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Fine", b =>
+                {
+                    b.HasOne("DB_Realize_OnlineLibrary.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.HistoryItem", b =>
+                {
+                    b.HasOne("DB_Realize_OnlineLibrary.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Reader", b =>
+                {
+                    b.HasOne("DB_Realize_OnlineLibrary.Models.GroupReaders", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("DB_Realize_OnlineLibrary.Models.Review", b =>
+                {
+                    b.HasOne("DB_Realize_OnlineLibrary.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

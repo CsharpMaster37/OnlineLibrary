@@ -22,13 +22,13 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="UsersBooks" asp-action="Index">Мои книги</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MyBooks" asp-action="Index">Мои книги</a>
                             </li>
-                        }
-                        @if (User.IsInRole("Admin"))
-                        {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AdminPanel" asp-action="Index">Админ-панель</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Fines" asp-action="Index">Мои штрафы</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Groups" asp-action="Index">Группы</a>
                             </li>
                         }
 
@@ -41,6 +41,7 @@
                                     Добро пожаловать, @User.Identity.Name!
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item btn btn-link" asp-area="Identity" asp-controller="User" asp-action="Profile">Профиль</a>
                                     <form id="logoutForm" asp-area="Identity" asp-controller="User" asp-action="Logout" method="post" class="d-inline">
                                         <button type="submit" class="dropdown-item btn btn-link">Выйти</button>
                                     </form>

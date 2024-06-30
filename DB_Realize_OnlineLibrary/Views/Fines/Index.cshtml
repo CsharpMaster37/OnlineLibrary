@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DB_Realize_OnlineLibrary.Models.Fine>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsMess)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OverdueDays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsMess)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverdueDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if(item.Status != "Оплачено")
+                {
+                    <a asp-action="Pay" asp-route-id="@item.Id">Оплатить</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

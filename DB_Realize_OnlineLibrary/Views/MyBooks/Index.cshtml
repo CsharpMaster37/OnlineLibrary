@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DB_Realize_OnlineLibrary.Models.HistoryItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateofCapture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedDateOfDelivery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateofDelivery)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateofCapture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedDateOfDelivery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateofDelivery)
+            </td>
+            <td>
+                @if(item.DateofDelivery == null)
+                {
+                    <a asp-action="Return" asp-route-id="@item.Id">Вернуть книгу</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

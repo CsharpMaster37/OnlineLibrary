@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
+using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel;
 
 namespace DB_Realize_OnlineLibrary.Controllers
 {
@@ -114,11 +116,54 @@ namespace DB_Realize_OnlineLibrary.Controllers
             //_db.SaveChanges();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string title, string author, string publisher)
         {
-            var books = _db.Books.Include(g => g.Genre).Include(p => p.Publisher).Include(c => c.Condition).ToList();
-            return View(books);
+            var books = _db.Books.Include(g => g.Genre).Include(p => p.Publisher).Include(c => c.Condition).AsQueryable();
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                books = books.Where(b => b.Name.Contains(title));
+            }
+
+            if (!string.IsNullOrEmpty(author))
+            {
+                books = books.Where(b => b.Author.Contains(author));
+            }
+
+            if (!string.IsNullOrEmpty(publisher))
+            {
+                books = books.Where(b => b.Publisher.Name.Contains(publisher));
+            }
+
+            var bookList = books.ToList();
+
+            List<int> history = new List<int>();
+            bool isFine = false;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = _userManager.GetUserId(User);
+                var History = _db.History.Where(c => c.ReaderId == userId && c.DateofDelivery == null).ToList();
+                var Fines = _db.Fines.Where(c => c.ReaderId == userId && c.Status == "Не оплачено").ToList();
+                isFine = Fines.Count > 0;
+
+                foreach (var item in History)
+                {
+                    history.Add(item.BookId);
+                }
+            }
+
+            ViewBag.Rent = history;
+            ViewBag.IsFine = isFine;
+
+            // Pass filter values to the view
+            ViewBag.TitleFilter = title;
+            ViewBag.AuthorFilter = author;
+            ViewBag.PublisherFilter = publisher;
+
+            return View(bookList);
         }
+
 
         public IActionResult Privacy()
         {
@@ -132,6 +177,7 @@ namespace DB_Realize_OnlineLibrary.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewBag.Genre = new SelectList(_db.Genres, "Id", "Name");
@@ -141,6 +187,7 @@ namespace DB_Realize_OnlineLibrary.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(Book book, IFormFile upload)
         {
             if (upload != null)
@@ -163,6 +210,7 @@ namespace DB_Realize_OnlineLibrary.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -180,6 +228,7 @@ namespace DB_Realize_OnlineLibrary.Controllers
             return View(book);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Book book, IFormFile upload)
         {
             if (upload != null)
@@ -203,8 +252,46 @@ namespace DB_Realize_OnlineLibrary.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Rent(int id)
         {
+            var userId = _userManager.GetUserId(User);
+            var book = _db.Books.FirstOrDefault(x => x.Id == id);
+            var newRent = new HistoryItem
+            {
+                ReaderId = userId,
+                BookId = id,
+                DateofCapture = DateTime.Now,
+                DateofDelivery = null,
+                ExpectedDateOfDelivery = DateTime.Now.AddDays(book.Days)
+            };
+            book.Quantity--;
+            _db.History.Add(newRent);
+            _db.Entry(book).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+            Book book = _db.Books.Include(f => f.Genre).FirstOrDefault(f => f.Id == id);
+            if (book == null)
+                return NotFound();
+            return View(book);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(Book book)
+        {
+            if (book != null)
+            {
+                _db.Entry(book).State = EntityState.Deleted;
+                _db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

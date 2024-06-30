@@ -13,8 +13,32 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\images\\60089.jpg",
+      "PackagePath": "staticwebassets\\images\\60089.jpg"
+    },
+    {
+      "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\images\\6008971009.jpg",
+      "PackagePath": "staticwebassets\\images\\6008971009.jpg"
+    },
+    {
       "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\images\\null_image.jpg",
       "PackagePath": "staticwebassets\\images\\null_image.jpg"
+    },
+    {
+      "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\images\\Чужак.jpg",
+      "PackagePath": "staticwebassets\\images\\Чужак.jpg"
+    },
+    {
+      "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\images\\враги.jpg",
+      "PackagePath": "staticwebassets\\images\\враги.jpg"
+    },
+    {
+      "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\images\\матанализ.jpg",
+      "PackagePath": "staticwebassets\\images\\матанализ.jpg"
+    },
+    {
+      "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\images\\спектр.jpg",
+      "PackagePath": "staticwebassets\\images\\спектр.jpg"
     },
     {
       "Id": "C:\\GitProjects\\OnlineLibrary\\DB_Realize_OnlineLibrary\\wwwroot\\js\\site.js",

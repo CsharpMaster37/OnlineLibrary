@@ -1,0 +1,41 @@
+﻿@model IEnumerable<DB_Realize_OnlineLibrary.Models.GroupReaders>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<p>
+    <a asp-action="Create">Создать группу</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Composition" asp-route-id="@item.Id">Состав</a>
+                    @if (ViewBag.InGroup == item.Id)
+                    {
+                        <a asp-action="Leave" asp-route-id="@item.Id">Покинуть</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Join" asp-route-id="@item.Id">Присоединиться</a>
+                    }
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

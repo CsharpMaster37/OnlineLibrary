@@ -12,10 +12,12 @@ namespace DB_Realize_OnlineLibrary.Models
         public int Id { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public int ReaderId { get; set; }
+        public string ReaderId { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         public int BookId { get; set; }
+        [Display(Name = "Книга")]
+        public Book Book { get; set; }
 
         [Display(Name = "Дата взятия")]
         public DateTime DateofCapture { get; set; }
@@ -24,8 +26,6 @@ namespace DB_Realize_OnlineLibrary.Models
         public DateTime? DateofDelivery { get; set; }
         [Display(Name = "Ожидаемая дата сдачи")]
         public DateTime? ExpectedDateOfDelivery { get; set; }
-        [Required]
-        [Display(Name = "ФИО читателя")]
-        public string NameReader { get; set; }
+
     }
 }

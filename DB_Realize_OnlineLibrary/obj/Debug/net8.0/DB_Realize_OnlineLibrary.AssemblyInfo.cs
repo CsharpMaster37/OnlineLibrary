@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DB_Realize_OnlineLibrary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f654f4cbe2f09e8ed78df27b9766e0424f4539b9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa3d21b598406c115c1e94efb8cb024ee19edc09")]
 [assembly: System.Reflection.AssemblyProductAttribute("DB_Realize_OnlineLibrary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DB_Realize_OnlineLibrary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

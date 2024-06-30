@@ -44,7 +44,7 @@ var app = builder.Build();
 //    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 //    var userManager = services.GetRequiredService<UserManager<Reader>>();
 
-//    var adminUser = await userManager.FindByIdAsync("e9881c71-1375-4d74-a092-3b443593cf9a");
+//    var adminUser = await userManager.FindByIdAsync("e2737965-9641-43ce-8e3b-1d2ea2a28197");
 //    if (adminUser != null)
 //    {
 //        var result = await userManager.AddToRoleAsync(adminUser, "Admin");

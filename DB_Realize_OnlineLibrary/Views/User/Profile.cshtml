@@ -1,0 +1,61 @@
+﻿@model DB_Realize_OnlineLibrary.Models.Reader
+
+<style>
+    h2 {
+        color: #333;
+    }
+
+    .profile-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .profile-container dl {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .profile-container dt {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .profile-container dd {
+            color: #333;
+            margin: 0;
+            margin-left: 5px;
+        }
+
+        .profile-container .element {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+</style>
+
+<div class="profile-container">
+    <h2>Профиль</h2>
+    <dl>
+        <div class="element">
+            <dt>Имя пользователя:</dt>
+            <dd>@Model.UserName</dd>
+        </div>
+        <div class="element">
+            <dt>Имя:</dt>
+            <dd>@(Model.Name != null ? Model.Name : "N/A")</dd>
+        </div>
+        <div class="element">
+            <dt>Дата рождения:</dt>
+            <dd>@(Model.DateofBirth.HasValue ? Model.DateofBirth.Value.ToShortDateString() : "N/A")</dd>
+        </div>
+        <div class="element">
+            <dt>Группа читателей:</dt>
+            <dd>@(ViewBag.GroupName != null ? ViewBag.GroupName : "N/A")</dd>
+        </div>
+    </dl>
+</div>

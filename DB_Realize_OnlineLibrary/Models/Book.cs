@@ -29,7 +29,7 @@ namespace DB_Realize_OnlineLibrary.Models
         public int Price { get; set; }
 
         [Required]
-        [Range(1, 1000, ErrorMessage = "Недопустимое кол-во дней")]
+        [Range(0, 1000, ErrorMessage = "Недопустимое кол-во дней")]
         [Display(Name = "Выдача на кол-во дней")]
         public int Days { get; set; }
 
@@ -54,6 +54,7 @@ namespace DB_Realize_OnlineLibrary.Models
         [ForeignKey("ConditionId")]
         [HiddenInput(DisplayValue = false)]
         public int? ConditionId { get; set; }
+        [Display(Name = "Состояние")]
         public Condition Condition { get; set; }
 
         [Required]

@@ -1,4 +1,5 @@
 ﻿using DB_Realize_OnlineLibrary.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DB_Realize_OnlineLibrary.Controllers
@@ -12,10 +13,19 @@ namespace DB_Realize_OnlineLibrary.Controllers
             _db = db;
             _environment = hostEnvironment;
         }
-        public IActionResult Index()
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Create()
         {
-            var conditions = _db.Conditions.ToList();
-            return View(conditions);
+            return View();
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Create(Condition condition)
+        {
+            _db.Conditions.Add(condition);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

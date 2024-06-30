@@ -26,16 +26,40 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\GitProjects\OnlineLibrary\DB_Realize_OnlineLibrary
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/AdminPanel/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxJbmRleC5jc2h0bWw=
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Condition/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZGl0aW9uXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Condition/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZGl0aW9uXEluZGV4LmNzaHRtbA==
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Fines/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmluZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Genre/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcSW5kZXguY3NodG1s
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Fines/Pay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmluZXNcUGF5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Genre/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VucmVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Groups/Composition.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBzXENvbXBvc2l0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Groups/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Groups/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Groups/Join.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBzXEpvaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Groups/Leave.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JvdXBzXExlYXZlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Home/Create.cshtml]
@@ -54,8 +78,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Publisher/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGlzaGVyXEluZGV4LmNzaHRtbA==
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/MyBooks/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXlCb29rc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/MyBooks/Return.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXlCb29rc1xSZXR1cm4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Publisher/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGlzaGVyXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Review/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3XERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Review/Reviews.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3XFJldmlld3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/Shared/Error.cshtml]
@@ -68,6 +108,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/User/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/GitProjects/OnlineLibrary/DB_Realize_OnlineLibrary/Views/User/Register.cshtml]
